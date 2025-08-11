@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Мои фото — Слайдер</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .slider {
+            position: relative;
+            max-width: 600px;
+            margin: 30px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            display: block;
+        }
+
+        .nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .nav button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .nav button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Meine Sprachzertifikate</h1>
+    <h3>Mit den Pfeilen nach links und rechts scrollen</h3>
+
+    <div class="slider">
+        <div class="slides">
+            <img src="images/photo1.png" alt="Фото 1">
+            <img src="images/photo2.jpg" alt="Фото 2">
+            <img src="images/photo3.jpg" alt="Фото 1">
+            <img src="images/photo4.jpg" alt="Фото 2">
+        </div>
+        <div class="nav">
+            <button id="prev">&#10094;</button>
+            <button id="next">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelector('.slides');
+        const images = document.querySelectorAll('.slides img');
+        const total = images.length;
+        let index = 0;
+
+        function showSlide(i) {
+            index = (i + total) % total; // зацикливание
+            slides.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        document.getElementById('next').addEventListener('click', () => {
+            showSlide(index + 1);
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            showSlide(index - 1);
+        });
+    </script>
+
+</body>
+
+</html>
